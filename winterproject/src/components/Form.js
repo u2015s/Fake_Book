@@ -2,7 +2,7 @@ import React from 'react';
 import fakebook from './fakebook.svg';
 import './Form.css';
 
-function App() {
+const Form = () => {
   return (
     <div>
     <div className="App bg-blue br-pill shadow-5">
@@ -31,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default Form;

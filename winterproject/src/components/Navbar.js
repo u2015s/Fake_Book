@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 class Navbar extends React.Component{
     state = { term: ''};
@@ -13,8 +14,13 @@ class Navbar extends React.Component{
                     
                     <div>
                         <div className="ui menu">
-                        <a className="item" href="#">Browse</a>
-                        
+                        <a className="item" href="#">
+                            {/* <NavLink to="/signinform"> Sign In</NavLink> */}
+                           
+                            
+                            </a>
+                        <a className="item" href="#">Sign Up</a>
+
                         <div className="right menu">
                         <div className="item">
                             <div className="ui transparent icon input">
