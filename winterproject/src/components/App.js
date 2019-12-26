@@ -7,10 +7,7 @@ import Navbar from "./Navbar"
 import FriendsTab from "./FriendsTab"
 import Faker from 'faker'
 import Form from './Form'
-
-
-
-
+import "./Form.css"
 class App extends React.Component{
 
     constructor(props){
@@ -21,10 +18,7 @@ class App extends React.Component{
             like: null,
             Posttext:[]    
         }
-            
-
-
-    }
+     }
 
     async componentDidMount(){
      
@@ -74,57 +68,39 @@ class App extends React.Component{
     render(){
                 return (
                 <div>
-                
-                {/* <BrowserRouter>
-                            <div> */}
-                            <Navbar />
-                                {/* <Switch>
+                {/* navbar router      */}
+                    <Navbar />
+                        <BrowserRouter>
+                            <div> 
+                            
+                            <Switch>
                                 <Route path="/signinform" component={Form} />
-                                </Switch>
+                                <Route path="/home" exact render={(props) =>
+                                    <div>
+                                    <NewPost {...props}
+                                    onClick={this.onClickPost}
+                                    />
+                                     {
+                                        this.state.comments.map((comment, index)=> (
+                                             <PostFeed 
+                                             key ={index}
+                                             text ={comment}
+                                             avt={Faker.image.avatar()}
+                                             image={Faker.image.image()}
+                                             onClick={this.onClickLike}
+                                             />
+                                        ))    
+                                    }  
+
+
+                                    </div>
+                                 }
+                                />
+                             </Switch>
                             </div> 
-                        </BrowserRouter>  */}
-                        
-                    <NewPost 
-                    onClick={this.onClickPost}
-                    // text={this.state.comments}
-                    
-                    />  
-                      
-
-
-
-
-
-
-                    {
-                       this.state.comments.map((comment, index)=> (
-                            <PostFeed 
-                            key ={index}
-                            text ={comment}
-                            avt={Faker.image.avatar()}
-                            image={Faker.image.image()}
-                            onClick={this.onClickLike}
-                            />
-                       ))    
-
-
-                    }
-                    {/* <NewPost 
-                    
-                    text={this.state.comments}
-                    
-                    />     */}
-                    
-                    {/* <div className="postfeed">
-                        <PostFeed 
-                        
-                        
-                        />
-                    </div> */}
-                    
-   
-                    
-                    </div>
+                        </BrowserRouter>  
+                 
+                 </div>
                     
                 );
                 

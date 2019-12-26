@@ -1,18 +1,23 @@
 const express = require('./node_modules/express');
 const mongoose = require('mongoose')
 const bodyParser = require('./node_modules/body-parser')
-
+const morgan = require('morgan')
 require('./models/newpost');
+require('./models/user')
 const app = express()
 
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/Fakebook`);
 
-
+app.use(morgan('combined'))
 app.use(bodyParser.json());
 
 require('./routes/newpostRoutes')(app);
+require('./routes/userRoutes')(app);
+
+
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
