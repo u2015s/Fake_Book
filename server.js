@@ -2,9 +2,11 @@ const express = require('./node_modules/express');
 const mongoose = require('mongoose')
 const bodyParser = require('./node_modules/body-parser')
 const morgan = require('morgan')
+const cors = require('cors');
 require('./models/newpost');
 require('./models/user')
 const app = express()
+
 
 
 mongoose.Promise = global.Promise;
@@ -12,7 +14,7 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/Fakebook`
 
 app.use(morgan('combined'))
 app.use(bodyParser.json());
-
+app.use(cors());
 require('./routes/newpostRoutes')(app);
 require('./routes/userRoutes')(app);
 

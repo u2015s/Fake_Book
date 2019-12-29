@@ -1,12 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
+import { BrowserRouter, Route, Switch, withRouter} from 'react-router-dom'
 import PostFeed from './PostFeed';
 import NewPost from "./NewPost";
 import Navbar from "./Navbar"
 import FriendsTab from "./FriendsTab"
+import Signupform from "./Signupform"
 import Faker from 'faker'
 import Form from './Form'
+import Welcome from './Welcome'
+import signoutpage from './signout'
 import "./Form.css"
 class App extends React.Component{
 
@@ -33,21 +36,18 @@ class App extends React.Component{
               console.log(this.state.comments)
     }
 
-
-
-
-  async onClickPost (text){
+        async onClickPost (text){
         const res = await axios.post(`/api/newpost`, { text })
             console.log(res);
-           
-            
+                             
         }
 
+        
   
  
         onClickLike(num){
                 console.log(num)
-        }npm
+        }
 
         // addNewcomment(comment){
         //     this.setState({
@@ -68,13 +68,14 @@ class App extends React.Component{
     render(){
                 return (
                 <div>
-                {/* navbar router      */}
-                    <Navbar />
+                 
                         <BrowserRouter>
-                            <div> 
-                            
-                            <Switch>
-                                <Route path="/signinform" component={Form} />
+                            <div>                 
+                            <Navbar />         
+                                <Route path="/signinform" exact component={Form} />
+                                <Route path="/signupform" exact component={Signupform}/>               
+                                <Route path="/welcome" exact component={Welcome}/>   
+                                <Route path="/signout" exact component={signoutpage}/>            
                                 <Route path="/home" exact render={(props) =>
                                     <div>
                                     <NewPost {...props}
@@ -91,12 +92,10 @@ class App extends React.Component{
                                              />
                                         ))    
                                     }  
-
-
                                     </div>
                                  }
                                 />
-                             </Switch>
+                             
                             </div> 
                         </BrowserRouter>  
                  
