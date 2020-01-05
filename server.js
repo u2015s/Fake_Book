@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const cors = require('cors');
 require('./models/newpost');
 require('./models/user')
+const newpostroutes = require('./routes/newpostRoutes')
 const app = express()
 
 
@@ -15,7 +16,8 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/Fakebook`
 app.use(morgan('combined'))
 app.use(bodyParser.json());
 app.use(cors());
-require('./routes/newpostRoutes')(app);
+app.use('/', newpostroutes)
+
 require('./routes/userRoutes')(app);
 
 

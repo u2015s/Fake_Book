@@ -22,7 +22,6 @@ ReactDOM.render(
 <Provider store ={store}>
     <BrowserRouter>
         <div>
-        {/* <Route component={Signupform}/> */}
         < App / >  
         </div>
     </BrowserRouter>

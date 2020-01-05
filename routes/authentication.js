@@ -24,7 +24,7 @@ exports.signup = function(req, res, next) {
     }
 
 
-    //check if email exists
+    //check if email is present
     User.findOne({ email: email }, function(err, existingUser) {
 
 
@@ -38,6 +38,7 @@ exports.signup = function(req, res, next) {
         const user = new User({
             email: email,
             password: password
+
         });
 
         user.save(function(err) {

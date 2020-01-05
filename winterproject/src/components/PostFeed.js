@@ -1,8 +1,11 @@
 import React from 'react'
-
+import postlikes from '../actions'
 class PostFeed extends React.Component{
 
-    state = {likes:null, comment:[]}
+    state = {liked:false,
+              likes:this.props.likes, 
+              comment:[]  
+            }
 
     onInputChange = (val) =>{
       this.setState({
@@ -11,16 +14,49 @@ class PostFeed extends React.Component{
 
   } 
     changelike=()=>{
-      this.setState(prevState => {
-        return{ likes: prevState.likes + 1}
-        }, ()=>{
-          this.props.onClick(this.state.likes)
-        })
+
+        if(!this.state.liked){
+          this.setState(prevState => {
+            return{ likes: prevState.likes + 1,
+                  liked: !this.state.liked
+            }
+           }, ()=>{
+             // sendlikestoserver()
+             // this.props.onClick(this.state.likes)
+           })
+        }
+        
+         else {
+          this.setState(prevState => {
+            return{ likes: prevState.likes - 1,
+                  liked: !this.state.liked
+            }
+           }, ()=>{
+             // sendlikestoserver()
+             // this.props.onClick(this.state.likes)
+           })
+         }
+        
       
     }
-    sendcomment = () =>{
-      this.props.Newcomment(this.state.comment)
-    }
+    // sendcomment = () =>{
+    //   // this.props.Newcomment(this.state.comment)
+    //      console.log(this.state.comment)
+    //      this.setState({comment:[ ]})
+        
+    //      const token = localStorage.getItem('token')
+    //      console.log(token)
+    //      const res =  await axios.post(`/api/newpost`,{
+    //          headers: {
+    //              'Content-Type': 'application/json',
+    //              'Authorization': token
+    //          }
+    //      })
+
+
+
+
+    
 
 
     //  mappingprops= () => {
@@ -28,18 +64,14 @@ class PostFeed extends React.Component{
 
     //       ))
     //  } 
-
-
-
-
-
     render(){
+      const label = this.state.liked ? 'Unlike' : 'Like'
         return(
          
           <div className="ui card" style={{marginLeft: '36%', marginRight: '49%'}}>
           <div className="content" >
-            <div className="right floated meta">14h</div>
-            <img className="ui avatar image" src={this.props.avt} /> Elliot
+        <div className="right floated meta">{this.props.time}</div>
+            <img className="ui avatar image" src={this.props.avt} /> {this.props.name}
             <div className="ui huge image">
               {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTgdmgiXDeDj7Osrvbdl1Ppuos_q_uCDIUZims8fBQjFzXwRoxX" /> */}
               <p>{this.props.text}</p>
@@ -57,10 +89,15 @@ class PostFeed extends React.Component{
               </span>
               <button className="ui icon button" onClick={this.changelike} >
               <span style={{marginleft:"25px"}}>
-                <i className="heart outline like icon" />
-                  {this.state.likes}
+                {label}
+                
+                   {this.props.likes}
+             
+                {/* <i className="heart outline like icon" /> */}
+                
               </span>
              </button>
+             
                 {/* <div className="ui left labeled button" tabIndex={0}>
                           <a className="ui basic right pointing label">
                             2,048

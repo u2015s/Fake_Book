@@ -6,7 +6,11 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true
     },
-    password: String
+    password: String,
+    post: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "newpost"
+    }]
 
 })
 
@@ -21,8 +25,8 @@ userSchema.pre('save', function(next) {
         bcrypt.hash(User.password, salt, function(err, hash) {
             if (err) { return next(err); }
             //overwrite plain text password
-            console.log(User.password)
-            console.log(hash)
+            // console.log(User.password)
+            // console.log(hash)
             User.password = hash;
             next();
         });

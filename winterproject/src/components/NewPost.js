@@ -1,33 +1,29 @@
 import React from 'react'
-
+import { connect } from 'react-redux';
+import { postit } from '../actions'
+import { withRouter } from 'react-router-dom'
+// import requireAuth from '../requireAuth'
 class NewPost extends React.Component {
-
-
     constructor(props) {
         super(props)
         this.state = {
-            text: []
+            text: " ",
+            
         }
-
     }
 
-    
-
-    onInputChange = (val) => {
+     onInputChange = (val) => {
         this.setState({
             text: val.target.value
-
         })
 
     }
-    SendingtoApp = () => {
-
-        this.props.onClick(this.state.text)
-
+    clickonpost = () => {
+        
+        this.props.postit(this.state)
+         this.setState({text:' '})  
+    
     }
-
-
-
 
     render(){
         return(
@@ -39,7 +35,7 @@ class NewPost extends React.Component {
                                 value={this.state.text}
                                 onChange={this.onInputChange}
                                 />
-                                <button className="ui primary button" onClick={this.SendingtoApp}>
+                                <button className="ui primary button" onClick={this.clickonpost}>
                                     Post
                                 </button>
                            </div>
@@ -49,7 +45,17 @@ class NewPost extends React.Component {
 
 }
 }
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        postit: post => {dispatch(postit(post))}
+        // signup: userInfo => { dispatch(signup(userInfo, ownProps)) }
+    }
 
+}
+
+const mapStateToProps = (state) => {
+    // return { errorMessage: state.auth.errorMessage }
+}
     
 
-export default NewPost;
+export default (connect(null, mapDispatchToProps)(NewPost))
