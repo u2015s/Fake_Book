@@ -1,10 +1,18 @@
 import React from 'react'
 import postlikes from '../actions'
+import axios from "axios"
 class PostFeed extends React.Component{
 
-    state = {liked:false,
+    state = { liked:false,
               likes:this.props.likes, 
-              comment:[]  
+              comment:[]
+            }
+
+
+
+            componentWillMount(){
+              const id = this.props.postid
+              console.log(id)
             }
 
     onInputChange = (val) =>{
@@ -20,9 +28,21 @@ class PostFeed extends React.Component{
             return{ likes: prevState.likes + 1,
                   liked: !this.state.liked
             }
-           }, ()=>{
-             // sendlikestoserver()
-             // this.props.onClick(this.state.likes)
+           }, ()=>{console.log(this.state)
+          //   const token = localStorage.getItem('token')
+          //   try {
+          //       const res = axios.post(`/api/updatepost`, {
+          //           likes: this.state.likes,
+          //           id:this.state.id
+          //       }, {
+          //           headers: {
+          //               'Content-Type': 'application/json',
+          //               'Authorization': token
+          //           }
+          //       })
+          //       } catch (e) {
+          //       console.log(e)
+          //   }
            })
         }
         
@@ -70,6 +90,7 @@ class PostFeed extends React.Component{
          
           <div className="ui card" style={{marginLeft: '36%', marginRight: '49%'}}>
           <div className="content" >
+        <div>{this.props.postid}</div>
         <div className="right floated meta">{this.props.time}</div>
             <img className="ui avatar image" src={this.props.avt} /> {this.props.name}
             <div className="ui huge image">

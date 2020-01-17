@@ -10,10 +10,9 @@ export const signup = (user, ownProps) => {
                 email: user.EmailAddress,
                 password: user.EnterPassword
             })
-            dispatch({ type: AUTH_USER, payload: res.data.token })
+            dispatch({ type: AUTH_USER, token: res.data.token, user: res.data.user })
             localStorage.setItem('token', res.data.token)
             ownProps.history.push(`/welcome`);
-
         } catch (e) {
             dispatch({ type: AUTH_ERROR, payload: 'Email in use' })
             console.log(e)
@@ -29,7 +28,7 @@ export const signin = (user, ownProps) => {
                 email: user.EmailAddress,
                 password: user.EnterPassword
             })
-            dispatch({ type: AUTH_USER, payload: res.data.token })
+            dispatch({ type: AUTH_USER, token: res.data.token, user: res.data.user })
             localStorage.setItem('token', res.data.token)
             ownProps.history.push(`/welcome`);
 

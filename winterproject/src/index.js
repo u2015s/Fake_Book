@@ -9,13 +9,37 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import reducers from './reducers' 
 import Signupform from './components/Signupform';
 
+function saveToLocalStorage(state){
+    try{
+        const serializedState = JSON.stringify(state)
+        localStorage.setItem('state',serializedState)
+    }catch(e){
+        console.log(e)
+    }
+
+}
+
+function loadFromLocalStorage(){
+    try{
+        const serializedState = localStorage.getItem('state')
+        if(serializedState===null) return undefined
+        return JSON.parse(serializedState)
+    } catch(e){
+        console.log(e)
+        return undefined
+    }
+}
+
+const preservedState = loadFromLocalStorage()
+
 const store = createStore(
     reducers,
-    {
-        auth: {authenticated: localStorage.getItem('token')}
-    },
+    preservedState,
     applyMiddleware(reduxThunk)
 )
+
+
+store.subscribe(()=> saveToLocalStorage(store.getState()))
 
 
 ReactDOM.render( 

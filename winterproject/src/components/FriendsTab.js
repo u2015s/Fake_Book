@@ -1,39 +1,16 @@
 import React from 'react'
 
-const FriendsTab = () =>{
-return(
-    
-    
-        <div className="ui vertical menu" style={{marginLeft:'80%'}}>
-
-        <div className="item" >
-                <div className="ui transparent icon input" style={{padding:'10px'}}>
-                <input type="text" placeholder="Search mail..."  />
-                <i className="search icon" />
-                </div>
-
-            <a className="active teal item">
-                Inbox
-                
-            </a>
+class FriendsTab extends React.Component{
+    render(){
+        return(
             <a className="item">
-                Spam
-                
+            <div className="ui small label"></div>
+                    {this.props.email}
             </a>
-            <a className="item">
-                Updates
-                
-            </a>
-           
-            </div>
-            </div>
+    
+            )
+    }
 
-
-        
-           
-
-
-)
 
 }
 

@@ -12,16 +12,40 @@ class Navbar extends React.Component{
         if(this.props.authenticated)
         {
             return(
-                <div>
-                     <NavLink to="/welcome">welcome</NavLink>
-                     <NavLink to="/signout">signout</NavLink>
+                <div className="ui pointing menu">
+
+                <a className="item"/>
+                <NavLink to="/home">Home </NavLink>              
+                
+                   
+                 <a className="item"/>
+                 <NavLink to="/chat">Chat </NavLink>               
+
+                 <a className="item"/>
+                 <NavLink to="/welcome">welcome </NavLink>
+                 
+                 <a className="item"/>
+                 <NavLink to="/friends">Friends </NavLink>
+                
+                <div className="right menu">
+                        <a class="item"/>
+                <NavLink to="/signout"> signout </NavLink>
+                         
+                </div>
+                 
+                   
                 </div>
             )
         }else{
             return(
-                <div>
-                     <NavLink to="/signinform"> Sign In</NavLink>
-                     <NavLink to="/signupform"> Sign Up</NavLink>
+                <div className="ui pointing menu">
+
+                <a className="item"/>
+                <NavLink to="/signinform"> Sign In</NavLink>
+                 
+                 <a className="item"/>
+                 <NavLink to="/signupform"> Sign Up</NavLink>
+               
                 </div>
             )
         }

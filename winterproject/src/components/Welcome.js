@@ -1,7 +1,17 @@
 import React from 'react'
 import requireAuth from '../requireAuth'
+import socketio from 'socket.io-client'
+let socket;
 class Welcome extends React.Component{
-        
+
+
+    constructor(){
+
+    }
+
+
+
+
 
         render(){
             return(

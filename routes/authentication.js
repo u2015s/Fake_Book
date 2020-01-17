@@ -12,7 +12,10 @@ function tokenForUser(user) {
 
 exports.signin = function(req, res, next) {
 
-    res.send({ token: tokenForUser(req.user) })
+    res.send({
+        token: tokenForUser(req.user),
+        user: req.user
+    })
 }
 
 exports.signup = function(req, res, next) {
@@ -41,11 +44,16 @@ exports.signup = function(req, res, next) {
 
         });
 
-        user.save(function(err) {
+        user.save(function(err, usersaved) {
             if (err) { return next(err); }
             // respond to request indicating the user was created
-            res.json({ token: tokenForUser(user) });
+            res.json({
+                token: tokenForUser(user),
+                id: usersaved._id,
+                email: usersaved.email
+            });
         })
+
 
     });
 

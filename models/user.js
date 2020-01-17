@@ -1,6 +1,18 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const userSchema = new mongoose.Schema({
+    //later add username and then use it for  login and signup purposes instead of email
+
+    username: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    ProfileImage: {
+        type: String,
+
+    },
     email: {
         type: String,
         unique: true,
@@ -10,7 +22,20 @@ const userSchema = new mongoose.Schema({
     post: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "newpost"
-    }]
+    }],
+    sentRequest: [{
+        receieverId: { type: String, default: '' }
+    }],
+    request: [{
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
+
+    }],
+    friendsList: [{
+        friendId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
+
+    }],
+    totalRequest: { type: Number, default: 0 }
+
 
 })
 
