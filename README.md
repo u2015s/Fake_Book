@@ -1,7 +1,7 @@
 # Social Media App
 
-
 ## Description
+A platform where a user can connect with others, share his/her thoughts and chat with others.
 
 ## Features
 1. Authentication (Register, Login and Log out)
