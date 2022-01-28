@@ -1,4 +1,4 @@
-# Social Media App
+# Fake Book
 
 ## Description
 A platform where a user can connect with others, share his/her thoughts and chat with others.
